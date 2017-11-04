@@ -1,3 +1,8 @@
+import { ListaEncuestasPage } from '../pages/lista-encuestas/lista-encuestas';
+import { GestorEncuestasPage } from '../pages/gestor-encuestas/gestor-encuestas';
+import { RegistroProAdmPage } from '../pages/registro-pro-adm/registro-pro-adm';
+import { RegistroAlumnoPage } from '../pages/registro-alumno/registro-alumno';
+import { ListaAsistenciaPage } from '../pages/lista-asistencia/lista-asistencia';
 import { MenuPage } from '../pages/menu/menu';
 import { LoginPage } from '../pages/login/login';
 import { BrowserModule } from '@angular/platform-browser';
@@ -27,7 +32,12 @@ firebase.initializeApp(firebaseConfig);
     MyApp,
     HomePage,
     LoginPage,
-    MenuPage
+    MenuPage,
+    ListaAsistenciaPage,
+    RegistroAlumnoPage,
+    RegistroProAdmPage,
+    GestorEncuestasPage,
+    ListaEncuestasPage
   ],
   imports: [
     BrowserModule,
@@ -39,7 +49,12 @@ firebase.initializeApp(firebaseConfig);
     MyApp,
     HomePage,
     LoginPage,
-    MenuPage
+    MenuPage,
+    ListaAsistenciaPage,
+    RegistroAlumnoPage,
+    RegistroProAdmPage,
+    GestorEncuestasPage,
+    ListaEncuestasPage
   ],
   providers: [
     StatusBar,

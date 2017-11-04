@@ -1,0 +1,119 @@
+<!--
+  Generated template for the ListaAsistenciaPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+
+      <ion-buttons left>
+          <button ion-button icon-only menuToggle>
+            <ion-icon name="menu"></ion-icon></button>
+        </ion-buttons>
+    <ion-title>Tomar asistencia</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content class="bg-image" padding>
+
+   
+
+  <div style="text-align: center;" [hidden]="filtradoHecho">
+      <ion-list radio-group>
+          <ion-list-header>
+           <font size="5px">Filtrar asistencia</font>
+          </ion-list-header>
+        
+          <ion-item>
+            <ion-label>Aula</ion-label>
+            <ion-radio (click)="filtrado('aula')"></ion-radio>
+          </ion-item>
+            <ion-item>
+                <ion-label>Materia</ion-label>
+                <ion-radio (click)="filtrado('materia')"></ion-radio>
+              </ion-item>
+        
+              <ion-item>
+                  <ion-label>Profesor</ion-label>
+                  <ion-radio (click)="filtrado('profesor')"></ion-radio>
+                </ion-item>
+              
+                <ion-item>
+                    <ion-label>Alumno</ion-label>
+                    <ion-radio (click)="filtrado('alumno')"></ion-radio>
+                  </ion-item>
+                
+                  <ion-item>
+                      <ion-label>Fecha</ion-label>
+                      <ion-radio (click)="filtrado('fecha')"></ion-radio>
+                    </ion-item>
+        </ion-list>
+    <br>
+    <ion-item *ngIf="opFiltrado == 'aula'">
+        <ion-label>-Aula-</ion-label>
+        <ion-select [(ngModel)]="opcionSeleccionada">
+          <ion-option value="303">303</ion-option>
+          <ion-option value="304">304</ion-option>
+          <ion-option value="305">305</ion-option>
+        </ion-select>
+    </ion-item>
+
+    <ion-item *ngIf="opFiltrado == 'materia'">
+        <ion-label>-Materia-</ion-label>
+        <ion-select [(ngModel)]="opcionSeleccionada">
+          <ion-option value="legislacion">Legislación</ion-option>
+          <ion-option value="metodologia">Metodología de sistemas</ion-option>
+          <ion-option value="labiv">Laboratorio IV</ion-option>
+        </ion-select>
+    </ion-item>
+
+    <ion-item *ngIf="opFiltrado == 'profesor'">
+        <ion-label>-Profesor-</ion-label>
+        <ion-select [(ngModel)]="opcionSeleccionada">
+          <ion-option value="analia">Buratovich, Analía</ion-option>
+          <ion-option value="evelina">Benavidez, Evelina</ion-option>
+          <ion-option value="octavio">Villegas, Octavio</ion-option>
+        </ion-select>
+    </ion-item>
+
+    <ion-item *ngIf="opFiltrado == 'alumno'">
+        <ion-input [(ngModel)]="opcionSeleccionada" type="text" placeholder="-Alumno-"></ion-input>
+    </ion-item>
+
+    <ion-item *ngIf="opFiltrado == 'fecha'">
+        <ion-label stacked>-Fecha-</ion-label>
+        <ion-input [(ngModel)]="opcionSeleccionada" type="date"></ion-input>
+    </ion-item>
+
+    <button ion-button full large color="dark" (click)="buscarAsistencia()">Buscar asistencia</button>
+
+  </div>
+
+  <div [hidden]="tablaFiltrado">
+      <ion-scroll scrollX="true" scrollY="true" style="height: 450px;width:340px;"> 
+    <table style="text-align: center;border-radius:70px;">
+      <thead style="background-color: #399F8B;">
+        <th>LEGAJO</th>
+        <th>NOMBRE Y APELLIDO</th>
+        <th>ASISTIÓ</th>
+      </thead>
+      <tbody *ngFor="let item of alumnos" style="background-color:white;">
+        <td>
+          {{item.legajo}}
+        </td>
+        <td>
+          {{item.alumno}}
+        </td>
+        <td>
+            <ion-toggle style="text-align: center;" color="secondary" checked="{{item.asistio}}"></ion-toggle>
+        </td>
+      </tbody>
+    </table>
+      </ion-scroll>
+    <button ion-button full large color="dark">Guardar asistencia</button>
+  </div>
+</ion-content>

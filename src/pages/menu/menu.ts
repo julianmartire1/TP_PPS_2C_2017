@@ -1,3 +1,4 @@
+import { ListaAsistenciaPage } from '../lista-asistencia/lista-asistencia';
 import { LoginPage } from '../login/login';
 import { Component } from '@angular/core';
 import { AlertController, IonicPage, LoadingController, NavController, NavParams } from 'ionic-angular';
@@ -25,6 +26,16 @@ export class MenuPage {
   logOut()
   {
     firebase.auth().signOut().then(()=> {this.navCtrl.push(LoginPage);});
+  }
+
+  sabe()
+  {
+    alert("sabe");
+  }
+
+  tomarAsistencia()
+  {
+    this.navCtrl.push(ListaAsistenciaPage);
   }
 
   ionViewDidLoad() {

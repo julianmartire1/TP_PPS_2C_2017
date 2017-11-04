@@ -1,1 +1,34 @@
-<ion-nav [root]="rootPage"></ion-nav>
+<ion-menu [content]="content">
+
+        <ion-header >
+                <ion-toolbar color="dark">
+                  <ion-title>Menu</ion-title>
+                </ion-toolbar>
+              </ion-header>
+
+<ion-content padding>
+
+<ion-list>
+        <button (click)="irAMenu()" color="dark" ion-button full outline menuToggle block>
+                <ion-icon></ion-icon>Página principal
+            </button>
+        <button (click)="irAAsistencia()" color="dark" ion-button full outline menuToggle block>
+            <ion-icon></ion-icon>Asistencia
+        </button>
+        <button (click)="irAAlumno()" color="primary" ion-button full outline menuToggle block>
+                <ion-icon></ion-icon>Administrar alumnos
+            </button>
+        <button (click)="irAProAdm()" color="asistencia" ion-button full outline menuToggle block>
+                <ion-icon></ion-icon>Administrar personal
+        </button>
+        <button (click)="irAGestEncuestas()" color="encuestas" ion-button full outline menuToggle block>
+                <ion-icon></ion-icon>Gestor de encuestas
+        </button>
+        <button color="danger" ion-button full outline menuClose>Cerrar menú</button> 
+</ion-list>
+
+
+</ion-content>
+
+</ion-menu>
+<ion-nav [root]="rootPage" #content></ion-nav>

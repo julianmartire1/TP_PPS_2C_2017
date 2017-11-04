@@ -7,7 +7,12 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Menú principal</ion-title>
+
+    <ion-buttons left>
+      <button ion-button icon-only menuToggle>
+        <ion-icon name="menu"></ion-icon></button>
+    </ion-buttons>
+
     <ion-buttons end>
       <button ion-button icon-only color="danger" (click)="logOut()" style="border-radius: 100%;">
           <ion-icon name="log-out"></ion-icon>&nbsp;&nbsp;
@@ -18,6 +23,30 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content class="bg-image" padding>
+
+<div style="text-align: center;">
+  <br>
+  <h5>¡Bienvenido nuevamente, [Nombre]!</h5>
+  <br>
+  <img src="assets/imgs/perfil.png" width="125x" height="125px">
+  <br>
+  <br>
+  <ion-list>
+    <ion-list-header><h2> <ion-icon ios="ios-person" md="md-person"></ion-icon> Perfil:</h2></ion-list-header>
+    <ion-item>
+      -Nombre: [Nombre]
+    </ion-item>
+      <ion-item>-E-mail: [E-Mail]</ion-item>
+    
+      
+       <ion-item> -Sexo: [Sexo]</ion-item>
+  
+        <ion-item>-Tipo: [TipoDeUsuario]</ion-item>
+  </ion-list>
+</div>
 
 </ion-content>
+<ion-fab right bottom>
+  <button ion-fab color="qr"><ion-icon ios="ios-qr-scanner" md="md-qr-scanner"></ion-icon></button>
+</ion-fab>

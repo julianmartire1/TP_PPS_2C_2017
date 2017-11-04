@@ -26,6 +26,53 @@ export class LoginPage {
   constructor(public navCtrl: NavController,public navParams: NavParams, public googleplus : GooglePlus, public alertCtrl : AlertController, public loadingCtrl : LoadingController) {
     
   }
+  
+/*
+  registroPrompt() 
+  {
+    const alert = this.alertCtrl.create({
+      title: 'Login',
+      cssClass: '',
+      inputs: [
+        {
+          name: 'email',
+          placeholder: 'Email',
+          type: 'email'
+        },
+        {
+          name: 'password',
+          placeholder: 'Password',
+          type: 'password'
+        },
+        {
+          name: 'confirmPassword',
+          placeholder: 'Confirmar password',
+          type: 'password'
+        },
+
+      ],
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          handler: data => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Registrarme',
+          handler: data => {
+              firebase.auth().createUserWithEmailAndPassword(data.email,data.password).then(()=>{
+                console.log("registrado");
+              })
+              .catch(error=>{console.log(error)});
+          }
+        }
+      ]
+    });
+    alert.present();
+  }
+*/
 
   loginComun()
   {

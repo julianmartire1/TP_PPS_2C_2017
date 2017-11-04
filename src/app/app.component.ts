@@ -1,3 +1,8 @@
+import { GestorEncuestasPage } from '../pages/gestor-encuestas/gestor-encuestas';
+import { RegistroProAdmPage } from '../pages/registro-pro-adm/registro-pro-adm';
+import { RegistroAlumnoPage } from '../pages/registro-alumno/registro-alumno';
+import { MenuPage } from '../pages/menu/menu';
+import { ListaAsistenciaPage } from '../pages/lista-asistencia/lista-asistencia';
 import { LoginPage } from '../pages/login/login';
 import { Component } from '@angular/core';
 import { Platform } from 'ionic-angular';
@@ -18,6 +23,31 @@ export class MyApp {
       statusBar.styleDefault();
       splashScreen.hide();
     });
+  }
+
+  irAAsistencia()
+  {
+    this.rootPage = ListaAsistenciaPage;
+  }
+
+  irAMenu()
+  {
+    this.rootPage = MenuPage;
+  }
+
+  irAAlumno()
+  {
+    this.rootPage = RegistroAlumnoPage;
+  }
+
+  irAProAdm()
+  {
+    this.rootPage = RegistroProAdmPage;
+  }
+
+  irAGestEncuestas()
+  {
+    this.rootPage = GestorEncuestasPage;
   }
 }
 
