@@ -1,0 +1,34 @@
+
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Encuesta</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-list *ngIf="display" style="background-color:bisque;text-align:center;">
+        <ion-item *ngFor="let item of Cuestionario.Preguntas" >
+          <ion-list>
+            {{item.question}}
+            <ion-item *ngIf="item.tipo == 'P'">
+                <ion-input color="encuestas" placeholder="Ingrese respuesta" type="text"></ion-input>
+            </ion-item>
+            <ion-item *ngIf="item.tipo == 'U'">
+              <ion-list *ngFor="let i of item.opciones">
+                <input color="encuestas" type="radio" name="i"> <label>{{ i }}</label>
+              </ion-list>
+            </ion-item>
+            <ion-item *ngIf="item.tipo == 'M'">
+              <ion-list *ngFor="let i of item.opciones">
+                <input color="encuestas" type="checkbox" name="check"> <label>{{ i }}</label>
+              </ion-list>
+            </ion-item>  
+          </ion-list>
+        </ion-item> 
+    </ion-list>
+    <button ion-button color="encuestas">Enviar respuesta</button>
+          
+</ion-content>

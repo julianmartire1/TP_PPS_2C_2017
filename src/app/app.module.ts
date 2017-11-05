@@ -1,5 +1,6 @@
 import { ListaEncuestasPage } from '../pages/lista-encuestas/lista-encuestas';
 import { GestorEncuestasPage } from '../pages/gestor-encuestas/gestor-encuestas';
+import { EncuestaPage} from '../pages/encuesta/encuesta';
 import { RegistroProAdmPage } from '../pages/registro-pro-adm/registro-pro-adm';
 import { RegistroAlumnoPage } from '../pages/registro-alumno/registro-alumno';
 import { ListaAsistenciaPage } from '../pages/lista-asistencia/lista-asistencia';
@@ -11,7 +12,9 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { GooglePlus } from '@ionic-native/google-plus';
+
 import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
 import firebase from "firebase";
 
 import { MyApp } from './app.component';
@@ -37,12 +40,14 @@ firebase.initializeApp(firebaseConfig);
     RegistroAlumnoPage,
     RegistroProAdmPage,
     GestorEncuestasPage,
-    ListaEncuestasPage
+    ListaEncuestasPage,
+    EncuestaPage
   ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
-    AngularFireModule.initializeApp(firebaseConfig)
+    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireDatabaseModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -54,7 +59,8 @@ firebase.initializeApp(firebaseConfig);
     RegistroAlumnoPage,
     RegistroProAdmPage,
     GestorEncuestasPage,
-    ListaEncuestasPage
+    ListaEncuestasPage,
+    EncuestaPage
   ],
   providers: [
     StatusBar,

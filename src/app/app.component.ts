@@ -1,4 +1,5 @@
 import { GestorEncuestasPage } from '../pages/gestor-encuestas/gestor-encuestas';
+import { ListaEncuestasPage } from '../pages/lista-encuestas/lista-encuestas';
 import { RegistroProAdmPage } from '../pages/registro-pro-adm/registro-pro-adm';
 import { RegistroAlumnoPage } from '../pages/registro-alumno/registro-alumno';
 import { MenuPage } from '../pages/menu/menu';
@@ -48,6 +49,10 @@ export class MyApp {
   irAGestEncuestas()
   {
     this.rootPage = GestorEncuestasPage;
+  }
+  irAListaEncuestas()
+  {
+    this.rootPage = ListaEncuestasPage;
   }
 }
 

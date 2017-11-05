@@ -2,12 +2,10 @@ import { ListaEncuestasPage } from '../lista-encuestas/lista-encuestas';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
-/**
- * Generated class for the GestorEncuestasPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { AngularFireDatabase } from 'angularfire2/database';
+//import { Observable } from 'rxjs/Observable';
+import { AngularFireList} from 'angularfire2/database';
+
 
 @IonicPage()
 @Component({
@@ -20,13 +18,21 @@ export class GestorEncuestasPage {
   public cantidad : number = 1;
 
   public question : string = "";
+  public nombre: string = "";
+  public DateStart: Date;
+  public DateEnd: Date;
+
   public option : Array<string> = ["","","","","",""];
   public respuesta : string = "";
   public encuesta : Array<any> = [];
   public cant : Array<number> = [1,2,3,4,5];
 
-  constructor(public navCtrl: NavController) {
 
+  //items: Observable<any[]>;
+  Items: AngularFireList<any>;
+  constructor(public navCtrl: NavController, afDB: AngularFireDatabase) {
+    //this.items = afDB.list('Encuestas').valueChanges();
+    this.Items = afDB.list('Encuestas');
   }
 
   AgregarQuestion()
@@ -36,12 +42,10 @@ export class GestorEncuestasPage {
     switch(this.formato)
     {
       case 'P':
-        item.name = this.encuesta.length-1;
         item.tipo = 'P';
         this.encuesta.push(item);
         break;
       case 'U':
-        item.name = this.encuesta.length+1;
         item.tipo = 'U';
         item.opciones= [];
         for(let i=1;i<=this.cantidad;i++)
@@ -51,7 +55,6 @@ export class GestorEncuestasPage {
         this.encuesta.push(item);
         break;
       case 'M':
-        item.name = this.encuesta.length+1;
         item.tipo = 'M';
         item.opciones= [];
         for(let i=1;i<=this.cantidad;i++)
@@ -63,12 +66,20 @@ export class GestorEncuestasPage {
     }
     this.question = ""; 
     this.respuesta = "";
-    console.log(this.option);
+    this.cantidad = 1;
+    this.formato = 'P';
+    this.option = []
   }
   
   SubirQuestion()
   { 
-    this.navCtrl.push(ListaEncuestasPage,{"encuesta":this.encuesta});
+    var item : any = {};
+    item.Nombre = this.nombre;
+    item.FechaComienzo = this.DateStart;
+    item.FechaFin = this.DateEnd;
+    item.Preguntas = this.encuesta;
+    this.Items.push(item);
+    //this.navCtrl.push(ListaEncuestasPage,{"encuesta":this.encuesta});
   }
 
   public mychange(event)

@@ -7,6 +7,10 @@
 <ion-header>
 
   <ion-navbar>
+    <ion-buttons left>
+      <button ion-button icon-only menuToggle>
+        <ion-icon name="menu"></ion-icon></button>
+    </ion-buttons>
     <ion-title>Encuestas</ion-title>
   </ion-navbar>
 
@@ -14,7 +18,7 @@
 
 
 <ion-content class="bg-image" padding>
-    <ion-list style="background-color:bisque;text-align:center;">
+    <!--<ion-list style="background-color:bisque;text-align:center;">
         <ion-item *ngFor="let item of encuesta" >
           <ion-list>
             {{ item.question }}:
@@ -34,5 +38,11 @@
             <button ion-button color="encuestas">Enviar respuesta</button>
           </ion-list>
         </ion-item> 
-    </ion-list> 
+    </ion-list> -->
+    <h4>Cuestionarios  de :</h4>
+    <ion-item>
+    <ion-list *ngFor="let item of Cuestionarios ">
+      <button ion-button  full color="encuestas" (click)="RealizarCuestionario(item.Nombre)">{{item.Nombre}}</button>
+    </ion-list>
+    </ion-item>
 </ion-content>
