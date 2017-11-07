@@ -1,0 +1,80 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Gestor de Encuestas
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    
+    <ion-list inset>
+             
+            <ion-item>
+              <ion-label style="color: black">Formato de Pregunta</ion-label>
+             
+              <ion-select [(ngModel)]="formato"  interface="popover">
+                <ion-option value="U">Respuesta única</ion-option>
+                <ion-option value="M">Respuestas multiples</ion-option>
+                <ion-option value="P">Respuesta propia</ion-option>
+              </ion-select>
+            </ion-item>
+            
+            <ion-item *ngIf="formato!='P'">
+              <ion-label style="color: black">Cantidad de Respuestas</ion-label>
+              <ion-select [(ngModel)]="cantidad" interface="popover" (ionChange)="mychange($event)">
+                <ion-option value="1">1</ion-option>
+                <ion-option value="2">2</ion-option>
+                <ion-option value="3">3</ion-option>
+                <ion-option value="4">4</ion-option>
+                <ion-option value="5">5</ion-option>
+              </ion-select>
+            </ion-item>
+
+            
+
+
+            <ion-item>
+              <ion-input type="text" placeholder="Pregunta" [(ngModel)]="question" required></ion-input>
+            </ion-item>
+
+            <ion-list *ngFor="let item of cant">
+            <ion-item *ngIf="item<=cantidad && formato!='P'">
+              <ion-input type="text" placeholder="Respuesta {{item}}" [(ngModel)]=option[item] required></ion-input>
+            </ion-item>
+            </ion-list>
+            
+    </ion-list>
+    
+
+    <button ion-button  (click)="AgregarQuestion()" [disabled]="question==null ||  question==''" full >Agregar Pregunta</button>
+    <button ion-button  (click)="SubirQuestion()"  full >Subir Cuestionario</button>
+    
+    <!--<ion-list>
+      <ion-item *ngFor="let item of encuesta" >
+        <ion-list radio-group>
+          <ion-list-header>
+            {{ item.question }}:
+          </ion-list-header>
+
+          <ion-item *ngIf="item.tipo == 'P'">
+              <ion-input placeholder="Ingrese respuesta" type="text"></ion-input>
+          </ion-item>
+
+          <ion-item *ngIf="item.tipo == 'U'">
+            <ion-list *ngFor="let i of item.opciones">
+              <input type="radio" name={{item.name}}> <label>{{ i }}</label>
+            </ion-list>
+          </ion-item>
+
+          <ion-item *ngIf="item.tipo == 'M'">
+            <ion-list *ngFor="let i of item.opciones">
+              <input type="checkbox" name={{item.name}}> <label>{{ i }}</label>
+            </ion-list>
+          </ion-item>
+          
+
+        </ion-list>
+      </ion-item>  
+    </ion-list>-->
+</ion-content>
