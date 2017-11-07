@@ -20,12 +20,25 @@ import firebase from "firebase";
 })
 export class MenuPage {
 
+  usuarioActual : any;
+  nombreComActual : any;
+  perfilActual : any;
+  emailActual : any;
+  sexoActual : any;
+  nombre : any;
+
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+    this.usuarioActual = JSON.parse(localStorage.getItem("usuario"));
+    this.nombre = this.usuarioActual.nombre;
+    this.nombreComActual = this.usuarioActual.nombre + " " + this.usuarioActual.apellido;
+    this.perfilActual = this.usuarioActual.perfil;
+    this.emailActual = this.usuarioActual.email;
+    this.sexoActual = this.usuarioActual.sexo;
   }
 
   logOut()
   {
-    firebase.auth().signOut().then(()=> {this.navCtrl.push(LoginPage);});
+    firebase.auth().signOut().then(()=> {this.navCtrl.push(LoginPage); localStorage.removeItem("usuario")});
   }
 
   sabe()

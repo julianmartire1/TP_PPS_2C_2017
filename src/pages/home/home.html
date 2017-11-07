@@ -1,14 +1,44 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      Ionic Blank
+      Completa tu perfil
     </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+  <ion-list>
+    <ion-item>
+        <ion-label color="primary">Nombre</ion-label>
+        <ion-input [(ngModel)]="nombre" placeholder="Nombre"></ion-input>
+    </ion-item>
+    <ion-item>
+          <ion-label color="primary">Apellido</ion-label>
+          <ion-input [(ngModel)]="apellido" placeholder="Apellido"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label color="primary">Sexo</ion-label>
+        <ion-input [(ngModel)]="sexo" placeholder="Sexo"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label color="primary">Perfil</ion-label>
+        <ion-select [(ngModel)]="perfil">
+          <ion-option value="alumno">Alumno</ion-option>
+          <ion-option value="profesor">Profesor</ion-option>
+          <ion-option value="administrativo">Administrativo</ion-option>
+          <ion-option value="administrador">Administrador</ion-option>
+        </ion-select>
+    </ion-item>
+    <ion-item *ngIf="perfil == 'alumno'">
+        <ion-label color="primary">División</ion-label>
+        <ion-select [(ngModel)]="division">
+            <ion-option value="4A">4º A</ion-option>
+            <ion-option value="4B">4º B</ion-option>
+        </ion-select>
+    </ion-item>
+    <ion-item>
+      <button style="width: 50%; height:60px;" color="secondary" (click)="completarRegistro()" ion-button>Completar mis datos</button>
+      <button style="width: 50%; height:60px;" color="danger" (click)="cancelar()" ion-button>Cancelar</button>
+    </ion-item>
+  </ion-list>
 </ion-content>

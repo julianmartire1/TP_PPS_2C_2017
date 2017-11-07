@@ -12,6 +12,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { GooglePlus } from '@ionic-native/google-plus';
 import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AppService } from './app.service';
 import firebase from "firebase";
 
 import { MyApp } from './app.component';
@@ -42,7 +44,8 @@ firebase.initializeApp(firebaseConfig);
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
-    AngularFireModule.initializeApp(firebaseConfig)
+    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireDatabaseModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -60,7 +63,8 @@ firebase.initializeApp(firebaseConfig);
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    GooglePlus
+    GooglePlus,
+    AppService
   ]
 })
 export class AppModule {}

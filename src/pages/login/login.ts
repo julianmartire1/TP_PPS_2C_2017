@@ -1,10 +1,13 @@
+import { AppService } from '../../app/app.service';
 import { MenuPage } from '../menu/menu';
 import { HomePage } from '../home/home';
 import { Component } from '@angular/core';
-import { AlertController, IonicPage, LoadingController,NavController, NavParams } from 'ionic-angular';
+import { AlertController, IonicPage, LoadingController,NavController, NavParams, ModalController} from 'ionic-angular';
 import { GooglePlus } from '@ionic-native/google-plus';
 import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 import firebase from "firebase";
+import { Observable } from 'rxjs/Rx';
 
 /**
  * Generated class for the LoginPage page.
@@ -23,7 +26,12 @@ export class LoginPage {
   email : string;
   password : string;
 
-  constructor(public navCtrl: NavController,public navParams: NavParams, public googleplus : GooglePlus, public alertCtrl : AlertController, public loadingCtrl : LoadingController) {
+  public usuariosList : AngularFireList<any>;
+  public usuariosObs : Observable<any>;
+  public usuarios : Array<any>;
+
+
+  constructor(public afDB: AngularFireDatabase, public navCtrl: NavController,public navParams: NavParams, public googleplus : GooglePlus, public alertCtrl : AlertController, public loadingCtrl : LoadingController, public modalCtrl: ModalController) {
     
   }
   
@@ -95,8 +103,28 @@ export class LoginPage {
       {
           firebase.auth().signInWithEmailAndPassword(this.email, this.password).then(ok => {
           
-          this.navCtrl.setRoot(MenuPage);
-          loader.present();       
+          if (this.verificarSiExiste(ok.uid)) 
+          {
+            console.log(ok.uid);
+            for (var i = 0; i < this.usuarios.length; i++) 
+            {
+              if (this.usuarios[i].token == ok.uid) 
+              {
+                var usuario = {token : this.usuarios[i].token, email : this.usuarios[i].email, sexo : this.usuarios[i].sexo, perfil : this.usuarios[i].perfil, nombre : this.usuarios[i].nombre, apellido : this.usuarios[i].apellido};
+              }
+              
+            }
+            
+            localStorage.setItem("usuario",JSON.stringify(usuario));
+            this.navCtrl.setRoot(MenuPage);
+            loader.present();  
+          } 
+          else 
+          {
+            let profileModal = this.modalCtrl.create(HomePage, { email: ok.email, token : ok.uid });
+            profileModal.present();
+          }
+          
           },
           error => {
           let alert = this.alertCtrl.create({
@@ -112,13 +140,40 @@ export class LoginPage {
     
   loginGoogle()
   {
+    let loader = this.loadingCtrl.create({
+      content: "Espere...",
+      duration: 2600
+      });
+
     this.googleplus.login({
       'webClientId':'297247795946-v0josakj1113a53jspfo34gdtmvsln6s.apps.googleusercontent.com',
       'offline':true
     }).then(res=>{
       firebase.auth().signInWithCredential(firebase.auth.GoogleAuthProvider.credential(res.idToken))
       .then(suc=>{
-        this.navCtrl.setRoot(MenuPage);
+        
+        if (this.verificarSiExiste(suc.uid)) 
+        {
+          console.log(suc.uid);
+          for (var i = 0; i < this.usuarios.length; i++) 
+          {
+            if (this.usuarios[i].token == suc.uid) 
+            {
+              var usuario = {token : this.usuarios[i].token, email : this.usuarios[i].email, sexo : this.usuarios[i].sexo, perfil : this.usuarios[i].perfil, nombre : this.usuarios[i].nombre, apellido : this.usuarios[i].apellido};
+            }
+            
+          }
+          
+          localStorage.setItem("usuario",JSON.stringify(usuario));
+          this.navCtrl.setRoot(MenuPage);
+          loader.present();  
+        } 
+        else 
+        {
+          let profileModal = this.modalCtrl.create(HomePage, { email: suc.email, token : suc.uid });
+          profileModal.present();
+        }
+
       })
       .catch(notSuc=>{
         let alertDos = this.alertCtrl.create({
@@ -131,18 +186,30 @@ export class LoginPage {
     })
   }
 
-  ionViewDidLoad() {
-    let loader = this.loadingCtrl.create({
-      content: "Espere...",
-      duration: 2600
-      });
+  ionViewDidLoad() {   
+    this.usuariosList = this.afDB.list('/usuarios');
+    this.usuariosObs = this.usuariosList.valueChanges();
+    this.usuariosObs.subscribe(
+        user => this.usuarios = user,
+      );
 
-    loader.present().then(()=> {console.log(firebase.auth().currentUser);
-      if (firebase.auth().currentUser != null) 
+    if(localStorage.getItem("usuario") != null)
+    {
+      this.navCtrl.setRoot(MenuPage);
+    }
+  }
+
+  verificarSiExiste(token)
+  {
+    for (var i = 0; i < this.usuarios.length; i++) {
+      if (this.usuarios[i].token == token)
       {
-        this.navCtrl.setRoot(MenuPage);  
+        return true;
       }
-    });
+      
+    }
+
+    return false;
   }
 
 }

@@ -27,7 +27,7 @@
 
 <div style="text-align: center;">
   <br>
-  <h5>¡Bienvenido nuevamente, [Nombre]!</h5>
+  <h5>¡Bienvenido nuevamente, {{nombre}}!</h5>
   <br>
   <img src="assets/imgs/perfil.png" width="125x" height="125px">
   <br>
@@ -35,14 +35,14 @@
   <ion-list>
     <ion-list-header><h2> <ion-icon ios="ios-person" md="md-person"></ion-icon> Perfil:</h2></ion-list-header>
     <ion-item>
-      -Nombre: [Nombre]
+      -Nombre completo: {{nombreComActual}}
     </ion-item>
-      <ion-item>-E-mail: [E-Mail]</ion-item>
+      <ion-item>-Correo: {{emailActual}}</ion-item>
     
       
-       <ion-item> -Sexo: [Sexo]</ion-item>
+       <ion-item> -Sexo: {{sexoActual}}</ion-item>
   
-        <ion-item>-Tipo: [TipoDeUsuario]</ion-item>
+        <ion-item>-Tipo: {{perfilActual}}</ion-item>
   </ion-list>
 </div>
 
